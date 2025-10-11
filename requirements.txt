@@ -1,0 +1,32 @@
+# Core Framework
+eel==0.16.0
+flask==2.3.3
+
+# Audio Processing
+pyttsx3==2.90
+SpeechRecognition==3.10.0
+pyaudio==0.2.11
+pygame==2.5.2
+
+# Computer Vision & Face Recognition
+opencv-python==4.8.1.78
+numpy==1.24.3
+
+# AI & Machine Learning
+hugchat==0.3.0
+pvporcupine==3.0.0
+
+# System Integration
+pyautogui==0.9.54
+pywhatkit==5.4
+
+# Database
+sqlite3
+
+# Web & HTTP
+requests==2.31.0
+httpx==0.25.2
+
+# Utilities
+pillow==10.0.1
+python-dotenv==1.0.0
