@@ -1,4 +1,4 @@
-# 🎃 Hacktoberfest 2024 - Jarvis AI Assistant
+# 🎃 Hacktoberfest 2025 - Jarvis AI Assistant
 
 ## Welcome Hacktoberfest Contributors! 🎉
 
@@ -137,7 +137,7 @@ We use specific labels to help you find suitable contributions:
 
 ### 1. Fork and Clone
 ```bash
-git clone https://github.com/YOUR_USERNAME/Jarvis.git
+git clone https://github.com/vannu07/Jarvis.git
 cd Jarvis
 ```
 
@@ -291,7 +291,7 @@ git push origin feature/your-feature-name
 - **Oct 31**: Hacktoberfest ends
 - **Nov 15**: Final review and recognition
 
-## 🎯 Goals for 2024
+## 🎯 Goals for 2025
 
 ### Technical Goals
 - 🎤 20+ new voice commands

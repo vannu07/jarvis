@@ -320,9 +320,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Varnit Kumar**
-- GitHub: [@VarnitKumar](https://github.com/vannu07)
+- GitHub: [@vannu07](https://github.com/vannu07)
 - LinkedIn: [Varnit Kumar](https://linkedin.com/in/varnit-kumar)
-- Email: varnitkumar@example.com
+- Email: [mail](kumar.varnit.16@gmail.com)
 
 ---
 
