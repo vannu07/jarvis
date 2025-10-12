@@ -15,7 +15,7 @@ class NewsFetcher:
             "apiKey": self.api_key,
             "pageSize": top_n,
             "sortBy": "publishedAt",
-            "language": "en"
+            "language": "en",
         }
 
         try:
@@ -28,8 +28,9 @@ class NewsFetcher:
             print(f"Network error: {e}")
             return []
 
+
 if __name__ == "__main__":
-    api_key = os.getenv("API_KEY")   # Replace with your API key
+    api_key = os.getenv("API_KEY")  # Replace with your API key
     fetcher = NewsFetcher(api_key)
 
     print("Welcome to News Fetcher!")
