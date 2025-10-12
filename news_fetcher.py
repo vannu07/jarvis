@@ -1,4 +1,8 @@
 import requests
+import os
+
+API_KEY = os.getenv("API_KEY")  # No hardcoded key
+
 
 class NewsFetcher:
     def __init__(self, api_key):
