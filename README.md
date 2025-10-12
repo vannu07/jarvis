@@ -9,6 +9,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 [![Stars](https://img.shields.io/github/stars/vannu07/jarvis?style=for-the-badge&logo=github)](https://github.com/vannu07/jarvis/stargazers)
 [![Forks](https://img.shields.io/github/forks/vannu07/jarvis?style=for-the-badge&logo=github)](https://github.com/vannu07/jarvis/network)
+[![CodeQL](https://github.com/vannu07/jarvis/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/vannu07/jarvis/actions/workflows/codeql-analysis.yml)
 
 <img src="https://raw.githubusercontent.com/vannu07/jarvis/main/frontend/assets/img/logo.ico" alt="Jarvis Logo" width="150"/>
 
