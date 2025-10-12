@@ -1,3 +1,17 @@
+# Keyword-Based News Fetcher
+
+## Description
+A Python module that fetches the top news articles for a given keyword using [NewsAPI.org](https://newsapi.org/).  
+Features:
+- Fetch top 3 news articles (can be changed in script).
+- Display title + URL.
+- Shortens long URLs for cleaner output.
+- Logs fetched news to `news_log.txt`.
+- Accepts commands like `show news about AI`.
+
+## Usage
+1. Install dependencies:
+
 <div align="center">
 
 # 🤖 Jarvis AI Assistant
@@ -719,3 +733,4 @@ If you find this project helpful, please consider:
 **© 2025 Varnit Kumar. All rights reserved.**
 
 </div>
+>>>>>>> bd1d8cfda59b40748beac88a96cbf5f19c082e32
