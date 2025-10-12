@@ -17,7 +17,7 @@ import subprocess
 import time
 import webbrowser
 import eel
-from hugchat import hugchat 
+from hugchat import hugchat
 import pvporcupine
 import pyaudio
 import pyautogui
@@ -25,17 +25,25 @@ import pywhatkit as kit
 import pygame
 from backend.command import speak
 from backend.config import (
-    ASSISTANT_NAME, DATABASE_PATH, AUDIO_START_SOUND_PATH,
-    PORCUPINE_ACCESS_KEY, PORCUPINE_KEYWORDS, PORCUPINE_SENSITIVITY,
-    HUGCHAT_COOKIE_PATH, WHATSAPP_COUNTRY_CODE, WHATSAPP_MESSAGE_DELAY
+    ASSISTANT_NAME,
+    DATABASE_PATH,
+    AUDIO_START_SOUND_PATH,
+    PORCUPINE_ACCESS_KEY,
+    PORCUPINE_KEYWORDS,
+    PORCUPINE_SENSITIVITY,
+    HUGCHAT_COOKIE_PATH,
+    WHATSAPP_COUNTRY_CODE,
+    WHATSAPP_MESSAGE_DELAY,
 )
 import sqlite3
 
 from backend.helper import extract_yt_term, remove_words
+
 conn = sqlite3.connect(DATABASE_PATH)
 cursor = conn.cursor()
 # Initialize pygame mixer
 pygame.mixer.init()
+
 
 # Define the function to play sound
 @eel.expose
@@ -43,39 +51,41 @@ def play_assistant_sound():
     sound_file = AUDIO_START_SOUND_PATH
     pygame.mixer.music.load(sound_file)
     pygame.mixer.music.play()
-    
-    
+
+
 def openCommand(query):
-    query = query.replace(ASSISTANT_NAME,"")
-    query = query.replace("open","")
+    query = query.replace(ASSISTANT_NAME, "")
+    query = query.replace("open", "")
     query.lower()
-    
+
     app_name = query.strip()
 
     if app_name != "":
 
         try:
-            cursor.execute( 
-                'SELECT path FROM sys_command WHERE name IN (?)', (app_name,))
+            cursor.execute(
+                "SELECT path FROM sys_command WHERE name IN (?)", (app_name,)
+            )
             results = cursor.fetchall()
 
             if len(results) != 0:
-                speak("Opening "+query)
+                speak("Opening " + query)
                 os.startfile(results[0][0])
 
-            elif len(results) == 0: 
+            elif len(results) == 0:
                 cursor.execute(
-                'SELECT url FROM web_command WHERE name IN (?)', (app_name,))
+                    "SELECT url FROM web_command WHERE name IN (?)", (app_name,)
+                )
                 results = cursor.fetchall()
-                
+
                 if len(results) != 0:
-                    speak("Opening "+query)
+                    speak("Opening " + query)
                     webbrowser.open(results[0][0])
 
                 else:
-                    speak("Opening "+query)
+                    speak("Opening " + query)
                     try:
-                        os.system('start '+query)
+                        os.system("start " + query)
                     except:
                         speak("not found")
         except:
@@ -84,44 +94,51 @@ def openCommand(query):
 
 def PlayYoutube(query):
     search_term = extract_yt_term(query)
-    speak("Playing "+search_term+" on YouTube")
+    speak("Playing " + search_term + " on YouTube")
     kit.playonyt(search_term)
 
 
 def hotword():
-    porcupine=None
-    paud=None
-    audio_stream=None
+    porcupine = None
+    paud = None
+    audio_stream = None
     try:
-       
-        # pre trained keywords    
-        porcupine=pvporcupine.create(
+
+        # pre trained keywords
+        porcupine = pvporcupine.create(
             access_key=PORCUPINE_ACCESS_KEY,
             keywords=PORCUPINE_KEYWORDS,
-            sensitivities=[PORCUPINE_SENSITIVITY] * len(PORCUPINE_KEYWORDS)
-        ) 
-        paud=pyaudio.PyAudio()
-        audio_stream=paud.open(rate=porcupine.sample_rate,channels=1,format=pyaudio.paInt16,input=True,frames_per_buffer=porcupine.frame_length)
-        
+            sensitivities=[PORCUPINE_SENSITIVITY] * len(PORCUPINE_KEYWORDS),
+        )
+        paud = pyaudio.PyAudio()
+        audio_stream = paud.open(
+            rate=porcupine.sample_rate,
+            channels=1,
+            format=pyaudio.paInt16,
+            input=True,
+            frames_per_buffer=porcupine.frame_length,
+        )
+
         # loop for streaming
         while True:
-            keyword=audio_stream.read(porcupine.frame_length)
-            keyword=struct.unpack_from("h"*porcupine.frame_length,keyword)
+            keyword = audio_stream.read(porcupine.frame_length)
+            keyword = struct.unpack_from("h" * porcupine.frame_length, keyword)
 
-            # processing keyword comes from mic 
-            keyword_index=porcupine.process(keyword)
+            # processing keyword comes from mic
+            keyword_index = porcupine.process(keyword)
 
             # checking first keyword detetcted for not
-            if keyword_index>=0:
+            if keyword_index >= 0:
                 print("hotword detected")
 
                 # pressing shorcut key win+j
                 import pyautogui as autogui
+
                 autogui.keyDown("win")
                 autogui.press("j")
                 time.sleep(2)
                 autogui.keyUp("win")
-                
+
     except:
         if porcupine is not None:
             porcupine.delete()
@@ -132,13 +149,27 @@ def hotword():
 
 
 def findContact(query):
-    
-    words_to_remove = [ASSISTANT_NAME, 'make', 'a', 'to', 'phone', 'call', 'send', 'message', 'wahtsapp', 'video']
+
+    words_to_remove = [
+        ASSISTANT_NAME,
+        "make",
+        "a",
+        "to",
+        "phone",
+        "call",
+        "send",
+        "message",
+        "wahtsapp",
+        "video",
+    ]
     query = remove_words(query, words_to_remove)
 
     try:
         query = query.strip().lower()
-        cursor.execute("SELECT Phone FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?", ('%' + query + '%', query + '%'))
+        cursor.execute(
+            "SELECT Phone FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?",
+            ("%" + query + "%", query + "%"),
+        )
         results = cursor.fetchall()
         print(results[0][0])
         mobile_number_str = str(results[0][0])
@@ -148,27 +179,25 @@ def findContact(query):
 
         return mobile_number_str, query
     except:
-        speak('not exist in contacts')
+        speak("not exist in contacts")
         return 0, 0
-    
-    
+
+
 def whatsApp(Phone, message, flag, name):
-    
 
-    if flag == 'message':
+    if flag == "message":
         target_tab = 12
-        jarvis_message = "message send successfully to "+name
+        jarvis_message = "message send successfully to " + name
 
-    elif flag == 'call':
+    elif flag == "call":
         target_tab = 7
-        message = ''
-        jarvis_message = "calling to "+name
+        message = ""
+        jarvis_message = "calling to " + name
 
     else:
         target_tab = 6
-        message = ''
-        jarvis_message = "staring video call with "+name
-
+        message = ""
+        jarvis_message = "staring video call with " + name
 
     # Encode the message for URL
     encoded_message = quote(message)
@@ -183,13 +212,13 @@ def whatsApp(Phone, message, flag, name):
     subprocess.run(full_command, shell=True)
     time.sleep(WHATSAPP_MESSAGE_DELAY)
     subprocess.run(full_command, shell=True)
-    
-    pyautogui.hotkey('ctrl', 'f')
+
+    pyautogui.hotkey("ctrl", "f")
 
     for i in range(1, target_tab):
-        pyautogui.hotkey('tab')
+        pyautogui.hotkey("tab")
 
-    pyautogui.hotkey('enter')
+    pyautogui.hotkey("enter")
     speak(jarvis_message)
 
 
@@ -198,7 +227,7 @@ def chatBot(query):
     chatbot = hugchat.ChatBot(cookie_path=HUGCHAT_COOKIE_PATH)
     id = chatbot.new_conversation()
     chatbot.change_conversation(id)
-    response =  chatbot.chat(user_input)
+    response = chatbot.chat(user_input)
     print(response)
     speak(response)
     return response
