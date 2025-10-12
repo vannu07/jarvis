@@ -1,0 +1,2 @@
+# This file ensures the trainer directory is tracked by git
+# The trainer.yml file will be generated here after training
