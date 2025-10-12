@@ -1,4 +1,8 @@
 import requests
+import os
+
+API_KEY = os.getenv("API_KEY")  # No hardcoded key
+
 
 class NewsFetcher:
     def __init__(self, api_key):
@@ -25,7 +29,7 @@ class NewsFetcher:
             return []
 
 if __name__ == "__main__":
-    api_key = "7a3f2e63417e42088c9b1b019dde16ef"  # Replace with your API key
+    api_key = os.getenv("API_KEY")   # Replace with your API key
     fetcher = NewsFetcher(api_key)
 
     print("Welcome to News Fetcher!")
