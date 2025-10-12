@@ -25,15 +25,13 @@ cursor.execute(query)
 # print(results[0][0])
 
 
-
-
 # cursor.execute("DROP TABLE IF EXISTS contacts;")
 # conn.commit()
-# cursor.execute('''CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY, name VARCHAR(200), Phone VARCHAR(255), email VARCHAR(255) NULL)''') 
+# cursor.execute('''CREATE TABLE IF NOT EXISTS contacts (id INTEGER PRIMARY KEY, name VARCHAR(200), Phone VARCHAR(255), email VARCHAR(255) NULL)''')
 
- 
+
 # desired_columns_indices = [0, 20]
- 
+
 # with open('contacts.csv', 'r', encoding='utf-8') as csvfile:
 #     csvreader = csv.reader(csvfile)
 #     for row in csvreader:
@@ -44,18 +42,18 @@ cursor.execute(query)
 # conn.commit()
 # conn.close()
 
-# print("Data inserted successfully") 
+# print("Data inserted successfully")
 
 
 # query = "INSERT INTO contacts VALUES (null,'Varnit Kumar', '1234567890', 'null')"
 # cursor.execute(query)
-# conn.commit() 
+# conn.commit()
 
 
 # query = 'Varnit'
 # query = query.strip().lower()  # Added parentheses to call the method
 
-# cursor.execute("SELECT Phone FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?", 
+# cursor.execute("SELECT Phone FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?",
 #                ('%' + query + '%', query + '%'))
 # results = cursor.fetchall()
 # print(results[0][0])
