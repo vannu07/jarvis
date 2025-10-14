@@ -1,4 +1,3 @@
-import csv
 import sqlite3
 
 conn = sqlite3.connect("jarvis.db")
