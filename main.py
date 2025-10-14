@@ -1,12 +1,10 @@
 import os
 import eel
 from backend.auth import recoganize
-from backend.auth.recoganize import AuthenticateFace
-from backend.feature import *
-from backend.command import *
+from backend.feature import play_assistant_sound
+from backend.command import speak
 from backend.config import (
     WEB_SERVER_HOST,
-    WEB_SERVER_PORT,
     WEB_SERVER_MODE,
     WEB_SERVER_BLOCK,
     USER_NAME,

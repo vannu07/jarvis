@@ -1,11 +1,9 @@
-import time
 import pyttsx3
 import speech_recognition as sr
 import eel
 from backend.config import (
     TTS_VOICE_ID,
     TTS_RATE,
-    TTS_VOLUME,
     TTS_ENGINE,
     SPEECH_LANGUAGE,
     SPEECH_TIMEOUT,

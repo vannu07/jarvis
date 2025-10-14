@@ -1,7 +1,4 @@
-from sys import flags
-import time
 import cv2
-import pyautogui as p
 from backend.config import (
     FACE_TRAINER_PATH,
     FACE_CASCADE_PATH,
