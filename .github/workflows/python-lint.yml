@@ -18,4 +18,4 @@ jobs:
       - name: Install ruff
         run: pip install ruff
       - name: Run ruff
-        run: ruff backend/ main.py run.py
+        run: ruff check backend/ main.py run.py
