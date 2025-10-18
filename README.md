@@ -1,20 +1,6 @@
-# Keyword-Based News Fetcher
-
-## Description
-A Python module that fetches the top news articles for a given keyword using [NewsAPI.org](https://newsapi.org/).  
-Features:
-- Fetch top 3 news articles (can be changed in script).
-- Display title + URL.
-- Shortens long URLs for cleaner output.
-- Logs fetched news to `news_log.txt`.
-- Accepts commands like `show news about AI`.
-
-## Usage
-1. Install dependencies:
-
 <div align="center">
 
-# 🤖 Jarvis AI Assistant
+# Jarvis AI Assistant
 
 ### *Your Personal Voice-Controlled AI Companion*
 
@@ -29,7 +15,7 @@ Features:
 
 *A production-ready voice assistant with facial recognition authentication, built on modern Python architecture and web technologies.*
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Documentation](#-development) • [Contributing](#-contributing)
+[Features](#features) • [Installation](#installation) • [Usage](#usage) • [Documentation](#development) • [Contributing](#contributing)
 
 ---
 
@@ -37,38 +23,42 @@ Features:
 
 </div>
 
-## ✨ Features
+## Overview
+
+Jarvis is an intelligent voice assistant that combines speech recognition, natural language processing, and computer vision to provide a seamless user experience. The system features biometric authentication, hotword detection, and extensive integration with popular platforms.
 
 <div align="center">
 
-| 🎤 Voice Control | 👤 Face Recognition | 🔥 Hotword Detection | 🌐 Web Integration |
+## Key Features
+
+| Voice Control | Face Recognition | Hotword Detection | Web Integration |
 |:---:|:---:|:---:|:---:|
 | Advanced speech-to-text | Secure biometric auth | Always-on wake word | Modern responsive UI |
 
 </div>
 
-### 🚀 Core Capabilities
+### Core Capabilities
 
 <table>
 <tr>
 <td width="50%">
 
-#### 🎯 Voice & AI
-- 🗣️ **Real-time Speech Recognition** using Google STT
-- 💬 **Natural Language Processing** with Hugging Face
-- 🎵 **Text-to-Speech** with customizable voices
-- 🔊 **Audio Visualization** in real-time
-- 🎙️ **Wake Word Detection** ("Jarvis", "Alexa")
+**Voice & AI**
+- Real-time Speech Recognition using Google STT
+- Natural Language Processing with Hugging Face
+- Text-to-Speech with customizable voices
+- Audio Visualization in real-time
+- Wake Word Detection ("Jarvis", "Alexa")
 
 </td>
 <td width="50%">
 
-#### 🔧 Smart Integrations
-- 📱 **WhatsApp Automation** (messages, calls, video)
-- 🎬 **YouTube Control** via voice commands
-- 💻 **System Control** (apps, windows, shortcuts)
-- 📞 **Contact Management** with voice lookup
-- 🌐 **Web Browsing** through voice
+**Smart Integrations**
+- WhatsApp Automation (messages, calls, video)
+- YouTube Control via voice commands
+- System Control (apps, windows, shortcuts)
+- Contact Management with voice lookup
+- Web Browsing through voice
 
 </td>
 </tr>
@@ -76,9 +66,9 @@ Features:
 
 ---
 
-## 🛠️ Tech Stack
-
 <div align="center">
+
+## Technology Stack
 
 ### Backend Technologies
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -100,28 +90,27 @@ Features:
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![PyPI](https://img.shields.io/badge/PyPI-3775A9?style=for-the-badge&logo=pypi&logoColor=white)
 
 </div>
 
 ---
 
-## 🏗️ Architecture
-
 <div align="center">
+
+## System Architecture
 
 ```mermaid
 graph TD
-    A[🌐 Web Frontend] -->|Eel Bridge| B[🎯 Main Process]
-    B --> C[🎤 Speech Recognition]
-    B --> D[👤 Face Authentication]
-    B --> E[🔥 Hotword Detection]
-    C --> F[📝 Command Parser]
-    F --> G[⚡ Feature Handlers]
-    G --> H[💾 SQLite Database]
-    G --> I[📱 WhatsApp Integration]
-    G --> J[🎬 YouTube Control]
-    G --> K[💬 AI Chatbot]
+    A[Web Frontend] -->|Eel Bridge| B[Main Process]
+    B --> C[Speech Recognition]
+    B --> D[Face Authentication]
+    B --> E[Hotword Detection]
+    C --> F[Command Parser]
+    F --> G[Feature Handlers]
+    G --> H[SQLite Database]
+    G --> I[WhatsApp Integration]
+    G --> J[YouTube Control]
+    G --> K[AI Chatbot]
     
     style A fill:#e1f5ff
     style B fill:#fff3e0
@@ -133,13 +122,13 @@ graph TD
 
 ---
 
-## 📋 Prerequisites
+## Prerequisites
 
 <table>
 <tr>
 <td width="50%">
 
-### 🖥️ System Requirements
+### System Requirements
 ```yaml
 OS: Windows 10/11, Linux, macOS
 Python: 3.10+
@@ -150,7 +139,7 @@ Storage: 500MB free space
 </td>
 <td width="50%">
 
-### 🔌 Hardware
+### Hardware
 ```yaml
 Microphone: Required for voice input
 Webcam: Required for face recognition
@@ -164,25 +153,22 @@ Audio Output: Speakers/Headphones
 
 ---
 
-## 🚀 Installation
+## Installation
 
-<details>
-<summary><b>📦 Quick Install (Click to expand)</b></summary>
-
-### Step 1️⃣: Clone Repository
+### Step 1: Clone Repository
 
 ```bash
 git clone https://github.com/vannu07/jarvis.git
 cd jarvis
 ```
 
-### Step 2️⃣: Setup Virtual Environment
+### Step 2: Setup Virtual Environment
 
 <table>
 <tr>
 <td width="50%">
 
-**🪟 Windows**
+**Windows**
 ```bash
 python -m venv venv
 venv\Scripts\activate
@@ -191,7 +177,7 @@ venv\Scripts\activate
 </td>
 <td width="50%">
 
-**🐧 Linux/Mac**
+**Linux/Mac**
 ```bash
 python3 -m venv venv
 source venv/bin/activate
@@ -201,13 +187,13 @@ source venv/bin/activate
 </tr>
 </table>
 
-### Step 3️⃣: Install Dependencies
+### Step 3: Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 4️⃣: Configure Environment
+### Step 4: Configure Environment
 
 Create a `.env` file:
 
@@ -215,6 +201,7 @@ Create a `.env` file:
 # API Keys
 HUGGINGFACE_TOKEN=your_token_here
 PORCUPINE_ACCESS_KEY=your_key_here
+NEWSAPI_KEY=your_newsapi_key
 
 # Voice Settings
 TTS_RATE=150
@@ -225,39 +212,35 @@ FACE_CONFIDENCE_THRESHOLD=50
 HOTWORD_SENSITIVITY=0.5
 ```
 
-### Step 5️⃣: Train Face Recognition (Optional)
+### Step 5: Train Face Recognition (Optional)
 
 ```bash
 python backend/auth/trainer.py
 ```
 
-</details>
-
 <div align="center">
 
-### 🎬 Quick Start
+### Quick Start
 
 ```bash
 python run.py
 ```
 
-**That's it! Jarvis will launch at** `http://localhost:8000` 🚀
-
-<img src="https://user-images.githubusercontent.com/74038190/212284136-03988914-d899-44b4-b1d9-4eeccf656e44.gif" width="500">
+**Jarvis will launch at** `http://localhost:8000`
 
 </div>
 
 ---
 
-## 💡 Usage
+## Usage
 
-### 🎤 Voice Commands
+### Voice Commands
 
 <table>
 <tr>
 <td width="33%">
 
-#### 🖥️ System Control
+#### System Control
 ```
 Jarvis, open Chrome
 Jarvis, launch VS Code
@@ -268,7 +251,7 @@ Jarvis, shutdown computer
 </td>
 <td width="33%">
 
-#### 🎵 Media Control
+#### Media Control
 ```
 Jarvis, play Metallica
 Jarvis, pause video
@@ -279,7 +262,7 @@ Jarvis, volume up
 </td>
 <td width="33%">
 
-#### 📱 Communication
+#### Communication
 ```
 Jarvis, message John
 Jarvis, call Sarah
@@ -291,7 +274,7 @@ Jarvis, open WhatsApp
 </tr>
 </table>
 
-### ⌨️ Keyboard Shortcuts
+### Keyboard Shortcuts
 
 <div align="center">
 
@@ -304,55 +287,50 @@ Jarvis, open WhatsApp
 
 </div>
 
-### 🎯 Wake Words
+### Wake Words
 
-Say **"Jarvis"** or **"Alexa"** followed by your command!
-
-<div align="center">
-<img src="https://user-images.githubusercontent.com/74038190/212284158-e840e285-664b-44d7-b79b-e264b5e54825.gif" width="400">
-</div>
+Say **"Jarvis"** or **"Alexa"** followed by your command
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
-📦 jarvis/
-┣ 📂 backend/
-┃ ┣ 📂 auth/
-┃ ┃ ┣ 📄 haarcascade_frontalface_default.xml
-┃ ┃ ┣ 📄 recognize.py        # 👤 Face recognition
-┃ ┃ ┣ 📄 trainer.py          # 🎓 Model training
-┃ ┃ ┗ 📂 trainer/            # 💾 Trained models
-┃ ┣ 📄 command.py            # 🎯 Command parser
-┃ ┣ 📄 config.py             # ⚙️ Configuration
-┃ ┣ 📄 db.py                 # 💾 Database ops
-┃ ┣ 📄 feature.py            # ⚡ Feature handlers
-┃ ┗ 📄 helper.py             # 🛠️ Utilities
-┣ 📂 frontend/
-┃ ┣ 📂 assets/
-┃ ┃ ┣ 📂 audio/              # 🔊 Sound files
-┃ ┃ ┣ 📂 img/                # 🖼️ Images & icons
-┃ ┃ ┗ 📂 vendor/             # 📚 Third-party libs
-┃ ┣ 📄 index.html            # 🌐 Main UI
-┃ ┣ 📄 style.css             # 🎨 Styles
-┃ ┣ 📄 script.js             # ✨ Particle effects
-┃ ┣ 📄 main.js               # 🎮 Core logic
-┃ ┗ 📄 controller.js         # 🎛️ Event handlers
-┣ 📄 main.py                 # 🚀 Entry point
-┣ 📄 run.py                  # 🔄 Launcher
-┣ 📄 requirements.txt        # 📦 Dependencies
-┗ 📄 jarvis.db              # 💾 SQLite DB
+jarvis/
+├── backend/
+│   ├── auth/
+│   │   ├── haarcascade_frontalface_default.xml
+│   │   ├── recognize.py        # Face recognition
+│   │   ├── trainer.py          # Model training
+│   │   └── trainer/            # Trained models
+│   ├── command.py              # Command parser
+│   ├── config.py               # Configuration
+│   ├── db.py                   # Database ops
+│   ├── feature.py              # Feature handlers
+│   └── helper.py               # Utilities
+├── frontend/
+│   ├── assets/
+│   │   ├── audio/              # Sound files
+│   │   ├── img/                # Images & icons
+│   │   └── vendor/             # Third-party libs
+│   ├── index.html              # Main UI
+│   ├── style.css               # Styles
+│   ├── script.js               # Particle effects
+│   ├── main.js                 # Core logic
+│   └── controller.js           # Event handlers
+├── main.py                     # Entry point
+├── run.py                      # Launcher
+├── requirements.txt            # Dependencies
+└── jarvis.db                  # SQLite DB
 ```
 
 ---
 
-## 🔧 Development
+## Development
 
-<details>
-<summary><b>🎨 Adding Custom Commands</b></summary>
+### Adding Custom Commands
 
-### 1️⃣ Define Command Pattern
+**1. Define Command Pattern**
 
 Edit `backend/command.py`:
 
@@ -365,18 +343,17 @@ def parse_command(query: str) -> dict:
         }
 ```
 
-### 2️⃣ Implement Handler
+**2. Implement Handler**
 
 Edit `backend/feature.py`:
 
 ```python
 def handle_custom_action(params: dict) -> str:
-    # Your implementation here
     result = do_something(params)
     return f"Action completed: {result}"
 ```
 
-### 3️⃣ Register Command
+**3. Register Command**
 
 ```python
 COMMAND_HANDLERS = {
@@ -385,13 +362,10 @@ COMMAND_HANDLERS = {
 }
 ```
 
-</details>
-
-<details>
-<summary><b>💾 Database Schema</b></summary>
+### Database Schema
 
 ```sql
--- 📇 Contacts Table
+-- Contacts Table
 CREATE TABLE contacts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -401,17 +375,17 @@ CREATE TABLE contacts (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 💻 Applications Table
+-- Applications Table
 CREATE TABLE apps (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     path TEXT NOT NULL,
-    keywords TEXT,  -- JSON array
+    keywords TEXT,
     icon TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 🌐 Web Commands Table
+-- Web Commands Table
 CREATE TABLE web_commands (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     command TEXT NOT NULL,
@@ -421,10 +395,7 @@ CREATE TABLE web_commands (
 );
 ```
 
-</details>
-
-<details>
-<summary><b>🧪 Testing</b></summary>
+### Testing
 
 ```bash
 # Run all tests
@@ -442,10 +413,7 @@ flake8 backend/
 pylint backend/
 ```
 
-</details>
-
-<details>
-<summary><b>🐳 Docker Deployment</b></summary>
+### Docker Deployment
 
 ```dockerfile
 FROM python:3.10-slim
@@ -477,21 +445,19 @@ docker build -t jarvis-ai .
 docker run -p 8000:8000 -v $(pwd)/jarvis.db:/app/jarvis.db jarvis-ai
 ```
 
-</details>
-
 ---
-
-## 📊 Performance Metrics
 
 <div align="center">
 
+## Performance Metrics
+
 | Metric | Value | Status |
 |:------:|:-----:|:------:|
-| 🚀 Cold Start Time | ~3.5s | ![](https://img.shields.io/badge/-Excellent-brightgreen) |
-| ⚡ Response Latency | <200ms | ![](https://img.shields.io/badge/-Fast-green) |
-| 🎯 Face Recognition Accuracy | 94.2% | ![](https://img.shields.io/badge/-High-blue) |
-| 💾 Memory Footprint | ~150MB | ![](https://img.shields.io/badge/-Efficient-green) |
-| 🔋 CPU Usage (Idle) | 2-5% | ![](https://img.shields.io/badge/-Low-brightgreen) |
+| Cold Start Time | ~3.5s | ![](https://img.shields.io/badge/-Excellent-brightgreen) |
+| Response Latency | <200ms | ![](https://img.shields.io/badge/-Fast-green) |
+| Face Recognition Accuracy | 94.2% | ![](https://img.shields.io/badge/-High-blue) |
+| Memory Footprint | ~150MB | ![](https://img.shields.io/badge/-Efficient-green) |
+| CPU Usage (Idle) | 2-5% | ![](https://img.shields.io/badge/-Low-brightgreen) |
 
 *Benchmarked on Windows 11, Intel i5-10400, 16GB RAM*
 
@@ -499,12 +465,9 @@ docker run -p 8000:8000 -v $(pwd)/jarvis.db:/app/jarvis.db jarvis-ai
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
-<details>
-<summary><b>🔴 Common Issues & Solutions</b></summary>
-
-### ❌ PyAudio Installation Fails
+### PyAudio Installation Fails
 
 **Windows:**
 ```bash
@@ -524,7 +487,7 @@ brew install portaudio
 pip install pyaudio
 ```
 
-### ❌ Face Recognition Not Working
+### Face Recognition Not Working
 
 1. Ensure good lighting conditions
 2. Position face 2-3 feet from camera
@@ -534,7 +497,7 @@ pip install pyaudio
    ```
 4. Check camera permissions in system settings
 
-### ❌ Voice Commands Unresponsive
+### Voice Commands Unresponsive
 
 1. Check microphone permissions
 2. Test microphone:
@@ -544,13 +507,13 @@ pip install pyaudio
 3. Verify internet connection
 4. Try different microphone device
 
-### ❌ Module Import Errors
+### Module Import Errors
 
 ```bash
 pip install --upgrade --force-reinstall -r requirements.txt
 ```
 
-### 🐞 Enable Debug Mode
+### Enable Debug Mode
 
 ```bash
 # Windows
@@ -562,29 +525,25 @@ export JARVIS_DEBUG=1
 python run.py
 ```
 
-</details>
-
 ---
-
-## 🤝 Contributing
 
 <div align="center">
 
-**We love contributions!** 💖
+## Contributing
 
-<img src="https://user-images.githubusercontent.com/74038190/212284087-bbe7e430-757e-4901-90bf-4cd2ce3e1852.gif" width="400">
+**We welcome contributions from the community**
 
 </div>
 
-### 📝 Contribution Guidelines
+### Contribution Guidelines
 
-1. 🍴 **Fork** the repository
-2. 🌿 **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. 💾 **Commit** your changes (`git commit -m 'feat: add amazing feature'`)
-4. 📤 **Push** to the branch (`git push origin feature/amazing-feature`)
-5. 🎉 **Open** a Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### 📋 Commit Convention
+### Commit Convention
 
 ```
 type(scope): subject
@@ -603,17 +562,17 @@ git commit -m "fix(face): improve recognition accuracy in low light"
 git commit -m "docs(readme): update installation instructions"
 ```
 
-### 🎯 Code Style
+### Code Style
 
-- ✅ Follow PEP 8 for Python code
-- ✅ Use type hints where applicable
-- ✅ Write docstrings for public functions
-- ✅ Run `black` and `flake8` before committing
-- ✅ Add unit tests for new features
+- Follow PEP 8 for Python code
+- Use type hints where applicable
+- Write docstrings for public functions
+- Run `black` and `flake8` before committing
+- Add unit tests for new features
 
 <div align="center">
 
-### 🌟 Top Contributors
+### Top Contributors
 
 <a href="https://github.com/vannu07/jarvis/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=vannu07/jarvis" />
@@ -623,35 +582,35 @@ git commit -m "docs(readme): update installation instructions"
 
 ---
 
-## 🗺️ Roadmap
+## Roadmap
 
 <table>
 <tr>
 <td width="33%">
 
-### 🎯 Short Term
-- [ ] 🌍 Multi-language support
-- [ ] 📱 Mobile companion app
-- [ ] 🎨 Theme customization
-- [ ] 🔌 Plugin system
+### Short Term
+- [ ] Multi-language support
+- [ ] Mobile companion app
+- [ ] Theme customization
+- [ ] Plugin system
 
 </td>
 <td width="33%">
 
-### 🚀 Medium Term
-- [ ] ☁️ Cloud synchronization
-- [ ] 🏠 Home automation
-- [ ] 🎓 Voice training
-- [ ] 📊 Analytics dashboard
+### Medium Term
+- [ ] Cloud synchronization
+- [ ] Home automation
+- [ ] Voice training
+- [ ] Analytics dashboard
 
 </td>
 <td width="33%">
 
-### 💫 Long Term
-- [ ] 🤖 Advanced AI models
-- [ ] 🌐 Cross-platform support
-- [ ] 👥 Multi-user profiles
-- [ ] 🔐 End-to-end encryption
+### Long Term
+- [ ] Advanced AI models
+- [ ] Cross-platform support
+- [ ] Multi-user profiles
+- [ ] End-to-end encryption
 
 </td>
 </tr>
@@ -659,9 +618,9 @@ git commit -m "docs(readme): update installation instructions"
 
 ---
 
-## 📜 License
-
 <div align="center">
+
+## License
 
 This project is licensed under the **MIT License**
 
@@ -673,9 +632,9 @@ See [LICENSE](LICENSE) file for details
 
 ---
 
-## 🙏 Acknowledgments
-
 <div align="center">
+
+## Acknowledgments
 
 Special thanks to these amazing projects:
 
@@ -688,49 +647,28 @@ Special thanks to these amazing projects:
 
 ---
 
-## 📞 Contact & Support
-
 <div align="center">
 
-**Varnit Kumar**
-
-[![GitHub](https://img.shields.io/badge/GitHub-vannu07-181717?style=for-the-badge&logo=github)](https://github.com/vannu07)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Varnit%20Kumar-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/varnit-kumar)
-[![Email](https://img.shields.io/badge/Email-kumar.varnit.16%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:kumar.varnit.16@gmail.com)
+## Support
 
 **Project Link:** [github.com/vannu07/jarvis](https://github.com/vannu07/jarvis)
 
+For issues, questions, or feature requests, please open an issue on GitHub
+
 ---
 
-### 💖 Show Your Support
+### Show Your Support
 
-If you find this project helpful, please consider:
-
-⭐ **Starring** this repository
-🐛 **Reporting** bugs
-💡 **Suggesting** new features
-🤝 **Contributing** to the code
-📢 **Sharing** with others
-
-<img src="https://user-images.githubusercontent.com/74038190/212284115-f47cd8ff-2ffb-4b04-b5bf-4d1c14c0247f.gif" width="400">
-
-**Made with ❤️ and Python**
+If you find this project helpful, please consider starring the repository
 
 [![Star History Chart](https://api.star-history.com/svg?repos=vannu07/jarvis&type=Date)](https://star-history.com/#vannu07/jarvis&Date)
 
-</div>
-
----
-
-<div align="center">
-
-### 🌟 Don't forget to star this repository!
+**Made with Python**
 
 ![](https://img.shields.io/github/stars/vannu07/jarvis?style=social)
 ![](https://img.shields.io/github/forks/vannu07/jarvis?style=social)
 ![](https://img.shields.io/github/watchers/vannu07/jarvis?style=social)
 
-**© 2025 Varnit Kumar. All rights reserved.**
+**Copyright 2025**
 
 </div>
->>>>>>> bd1d8cfda59b40748beac88a96cbf5f19c082e32
