@@ -1,8 +1,8 @@
 import os
 import eel
 import threading
-from backend.auth import recoganize
-from backend.auth.recoganize import AuthenticateFace
+from backend.auth import recognize
+from backend.auth.recognize import AuthenticateFace
 from backend.feature import *
 from backend.command import * # Assuming a take_command() function exists here
 from backend.config import (
@@ -70,7 +70,7 @@ def start():
         speak(f"Welcome to Jarvis - Your AI Assistant by {USER_NAME}")
         speak("Ready for Face Authentication")
         
-        flag = recoganize.AuthenticateFace()
+        flag = recognize.AuthenticateFace()
         if flag == 1:
             speak("Face recognized successfully")
             eel.hideFaceAuth()
