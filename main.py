@@ -2,9 +2,10 @@ import os
 import eel
 import threading
 import webbrowser
+
 from backend.auth.recognize import AuthenticateFace
-from backend.feature import speak
-from backend.command import *  # Assuming a take_command() function exists here
+from backend.feature import speak, play_assistant_sound
+from backend.command import take_command
 from backend.config import (
     WEB_SERVER_HOST,
     WEB_SERVER_PORT,
