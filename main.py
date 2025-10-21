@@ -84,8 +84,7 @@ def start():
             speak("Face not recognized. Please try again")
             # In a real app, you might want to handle this case differently,
             # maybe by retrying or exiting.
-            # For now, we'll still set the event to allow commanding without auth.
-            auth_complete.set() 
+            # For now, we will NOT set the event to prevent commanding without auth.
 
     os.system(f'start msedge.exe --app="http://{WEB_SERVER_HOST}:{WEB_SERVER_PORT}/index.html"')
 
