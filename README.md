@@ -111,11 +111,20 @@ graph TD
     G --> I[WhatsApp Integration]
     G --> J[YouTube Control]
     G --> K[AI Chatbot]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff3e0
-    style G fill:#f3e5f5
-    style H fill:#e8f5e9
+
+    %% Consistent style for all nodes
+    style A fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style B fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style C fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style D fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style E fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style F fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style G fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style H fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style I fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style J fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+    style K fill:#ede7f6,stroke:#4a148c,stroke-width:1px,color:#212121
+
 ```
 
 </div>
