@@ -2,10 +2,8 @@ import os
 import eel
 import threading
 import webbrowser
-
-# If the package folder is actually named `recoganize` keep it; otherwise correct to `recognize`
-from backend.auth.recoganize import AuthenticateFace
-from backend.feature import *
+from backend.auth.recognize import AuthenticateFace
+from backend.feature import speak
 from backend.command import *  # Assuming a take_command() function exists here
 from backend.config import (
     WEB_SERVER_HOST,
