@@ -15,7 +15,7 @@ from backend.config import (
     FRONTEND_INDEX_FILE,
 )
 # Import our new reminder function
-from backend.features.reminder import set_reminder
+from backend.feature.reminder import set_reminder
 
 # A flag to signal when authentication is complete
 auth_complete = threading.Event()
