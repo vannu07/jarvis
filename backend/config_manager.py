@@ -6,7 +6,7 @@ Description: Handles loading and management of environment variables and configu
 
 import os
 import logging
-from typing import Optional, Union
+from typing import Optional
 from pathlib import Path
 
 

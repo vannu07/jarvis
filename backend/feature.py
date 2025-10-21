@@ -8,9 +8,7 @@
 #     playsound(music_dir)
 
 
-from compileall import compile_path
 import os
-import re
 from shlex import quote
 import struct
 import subprocess
@@ -86,9 +84,9 @@ def openCommand(query):
                     speak("Opening " + query)
                     try:
                         os.system("start " + query)
-                    except:
+                    except Exception:
                         speak("not found")
-        except:
+        except Exception:
             speak("some thing went wrong")
 
 
@@ -139,7 +137,7 @@ def hotword():
                 time.sleep(2)
                 autogui.keyUp("win")
 
-    except:
+    except Exception:
         if porcupine is not None:
             porcupine.delete()
         if audio_stream is not None:
@@ -178,7 +176,7 @@ def findContact(query):
             mobile_number_str = WHATSAPP_COUNTRY_CODE + mobile_number_str
 
         return mobile_number_str, query
-    except:
+    except Exception:
         speak("not exist in contacts")
         return 0, 0
 
