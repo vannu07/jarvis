@@ -11,11 +11,21 @@
 * Date: Mon Sep 20 17:14:00 2010 -0600
 */
 (function($){
+	// Simple HTML escaping function
+	function escapeHtml(text) {
+		return String(text)
+			.replace(/&/g, '&amp;')
+			.replace(/</g, '&lt;')
+			.replace(/>/g, '&gt;')
+			.replace(/"/g, '&quot;')
+			.replace(/'/g, '&#39;');
+	}
+
 	function injector(t, splitter, klass, after) {
 		var a = t.text().split(splitter), inject = '';
 		if (a.length) {
 			$(a).each(function(i, item) {
-				inject += '<span class="'+klass+(i+1)+'">'+item+'</span>'+after;
+				inject += '<span class="'+klass+(i+1)+'">'+escapeHtml(item)+'</span>'+after;
 			});	
 			t.empty().append(inject);
 		}
