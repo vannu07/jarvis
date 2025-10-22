@@ -1,13 +1,8 @@
 import cv2
-from backend.config import (
-    FACE_TRAINER_PATH,
-    FACE_CASCADE_PATH,
-    FACE_RECOGNITION_CONFIDENCE,
-    CAMERA_INDEX,
-    CAMERA_WIDTH,
-    CAMERA_HEIGHT,
-    FACE_RECOGNITION_NAMES,
-)
+
+from backend.config import (CAMERA_HEIGHT, CAMERA_INDEX, CAMERA_WIDTH,
+                            FACE_CASCADE_PATH, FACE_RECOGNITION_CONFIDENCE,
+                            FACE_RECOGNITION_NAMES, FACE_TRAINER_PATH)
 
 
 def AuthenticateFace():

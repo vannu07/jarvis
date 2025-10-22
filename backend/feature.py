@@ -7,36 +7,30 @@
 #     music_dir = "frontend\\assets\\audio\\start_sound.mp3"
 #     playsound(music_dir)
 
-from backend.nlp.command_parser import parse_command
-from backend.command import takecommand, speak
-from backend.helper import extract_yt_term, remove_words
-
 import os
+import sqlite3
 import struct
 import subprocess
 import time
 import webbrowser
 from shlex import quote
-import sqlite3
+
 import eel
 import pvporcupine
 import pyaudio
 import pyautogui
-import pywhatkit as kit
 import pygame
+import pywhatkit as kit
 from hugchat import hugchat
 
-from backend.config import (
-    ASSISTANT_NAME,
-    DATABASE_PATH,
-    AUDIO_START_SOUND_PATH,
-    PORCUPINE_ACCESS_KEY,
-    PORCUPINE_KEYWORDS,
-    PORCUPINE_SENSITIVITY,
-    HUGCHAT_COOKIE_PATH,
-    WHATSAPP_COUNTRY_CODE,
-    WHATSAPP_MESSAGE_DELAY,
-)
+from backend.command import speak, takecommand
+from backend.config import (ASSISTANT_NAME, AUDIO_START_SOUND_PATH,
+                            DATABASE_PATH, HUGCHAT_COOKIE_PATH,
+                            PORCUPINE_ACCESS_KEY, PORCUPINE_KEYWORDS,
+                            PORCUPINE_SENSITIVITY, WHATSAPP_COUNTRY_CODE,
+                            WHATSAPP_MESSAGE_DELAY)
+from backend.helper import extract_yt_term, remove_words
+from backend.nlp.command_parser import parse_command
 
 # -----------------------------
 # Database & audio setup
@@ -44,6 +38,7 @@ from backend.config import (
 conn = sqlite3.connect(DATABASE_PATH)
 cursor = conn.cursor()
 pygame.mixer.init()
+
 
 # -----------------------------
 # Play assistant start sound
@@ -53,6 +48,7 @@ def play_assistant_sound():
     sound_file = AUDIO_START_SOUND_PATH
     pygame.mixer.music.load(sound_file)
     pygame.mixer.music.play()
+
 
 # -----------------------------
 # Intent handling (Parser Integration)
@@ -67,6 +63,7 @@ def handle_user_text(user_text):
 
     if intent == "get_time":
         from datetime import datetime
+
         now = datetime.now().strftime("%H:%M")
         speak(f"The current time is {now}")
 
@@ -78,6 +75,7 @@ def handle_user_text(user_text):
 
     else:
         speak("Intent recognized but no action defined.")
+
 
 # -----------------------------
 # Core Command Functions
@@ -118,10 +116,12 @@ def openCommand(query):
         print("Error in openCommand:", e)
         speak("Something went wrong while opening.")
 
+
 def PlayYoutube(query):
     search_term = extract_yt_term(query)
     speak("Playing " + search_term + " on YouTube")
     kit.playonyt(search_term)
+
 
 # -----------------------------
 # Hotword detection + parser link
@@ -175,13 +175,22 @@ def hotword():
         if paud is not None:
             paud.terminate()
 
+
 # -----------------------------
 # WhatsApp contact + messaging
 # -----------------------------
 def findContact(query):
     words_to_remove = [
-        ASSISTANT_NAME, "make", "a", "to", "phone", "call",
-        "send", "message", "whatsapp", "video",
+        ASSISTANT_NAME,
+        "make",
+        "a",
+        "to",
+        "phone",
+        "call",
+        "send",
+        "message",
+        "wahtsapp",
+        "video",
     ]
     query = remove_words(query, words_to_remove)
 
@@ -205,6 +214,7 @@ def findContact(query):
         print("Error in findContact:", e)
         speak("Could not find the contact.")
         return 0, 0
+
 
 def whatsApp(Phone, message, flag, name):
     if flag == "message":
@@ -233,6 +243,7 @@ def whatsApp(Phone, message, flag, name):
     pyautogui.hotkey("enter")
 
     speak(jarvis_message)
+
 
 # -----------------------------
 # Chatbot fallback

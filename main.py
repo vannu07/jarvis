@@ -1,20 +1,15 @@
 import os
-import eel
 import threading
 import webbrowser
 
+import eel
+
 from backend.auth.recognize import AuthenticateFace
-from backend.feature import speak, play_assistant_sound
 from backend.command import take_command
-from backend.config import (
-    WEB_SERVER_HOST,
-    WEB_SERVER_PORT,
-    WEB_SERVER_MODE,
-    WEB_SERVER_BLOCK,
-    FRONTEND_PATH,
-    FRONTEND_INDEX_FILE,
-    USER_NAME,
-)
+from backend.config import (FRONTEND_INDEX_FILE, FRONTEND_PATH, USER_NAME,
+                            WEB_SERVER_BLOCK, WEB_SERVER_HOST, WEB_SERVER_MODE,
+                            WEB_SERVER_PORT)
+from backend.feature import play_assistant_sound, speak
 from backend.feature.reminder import set_reminder
 
 # Events for coordination and clean shutdown
@@ -90,16 +85,20 @@ def start():
 
     # Open the frontend in the default browser (cross-platform)
     try:
-        webbrowser.open(f'http://{WEB_SERVER_HOST}:{WEB_SERVER_PORT}/index.html', new=1)
+        webbrowser.open(f"http://{WEB_SERVER_HOST}:{WEB_SERVER_PORT}/index.html", new=1)
     except Exception:
         # Fallback to the original os.system if needed on Windows
         try:
-            os.system(f'start msedge.exe --app="http://{WEB_SERVER_HOST}:{WEB_SERVER_PORT}/index.html"')
+            os.system(
+                f'start msedge.exe --app="http://{WEB_SERVER_HOST}:{WEB_SERVER_PORT}/index.html"'
+            )
         except Exception:
             pass
 
     # Start the command handler in a background NON-daemon thread so we can join it
-    command_thread = threading.Thread(target=command_handler, args=(stop_event,), daemon=False)
+    command_thread = threading.Thread(
+        target=command_handler, args=(stop_event,), daemon=False
+    )
     command_thread.start()
 
     # Start eel and ensure we perform cleanup on exit
@@ -119,5 +118,5 @@ def start():
         command_thread.join(timeout=5)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     start()

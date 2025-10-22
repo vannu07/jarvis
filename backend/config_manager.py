@@ -4,10 +4,10 @@ Created by: Varnit Kumar
 Description: Handles loading and management of environment variables and configuration
 """
 
-import os
 import logging
-from typing import Optional
+import os
 from pathlib import Path
+from typing import Optional
 
 
 class Config:
