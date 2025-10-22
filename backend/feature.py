@@ -228,7 +228,7 @@ def whatsApp(Phone, message, flag, name):
     subprocess.run(full_command, shell=True)
 
     pyautogui.hotkey("ctrl", "f")
-    for _ in range(1, target_tab):
+    for _ in range(target_tab - 1):
         pyautogui.hotkey("tab")
     pyautogui.hotkey("enter")
 
