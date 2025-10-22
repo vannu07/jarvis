@@ -1,5 +1,6 @@
-import requests
 import os
+
+import requests
 
 API_KEY = os.getenv("API_KEY")  # No hardcoded key
 

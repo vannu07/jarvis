@@ -5,12 +5,12 @@ flask==2.3.3
 # Audio Processing
 pyttsx3==2.90
 SpeechRecognition==3.10.0
-pyaudio==0.2.11
+pyaudio              # MUST be unlocked to install any version on 3.10/3.11
 pygame==2.5.2
 
 # Computer Vision & Face Recognition
 opencv-python==4.8.1.78
-numpy==1.24.3
+numpy==1.24.3         # This version works on Python 3.10/3.11
 
 # AI & Machine Learning
 hugchat==0.3.0

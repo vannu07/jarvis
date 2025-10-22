@@ -1,15 +1,10 @@
+import eel
 import pyttsx3
 import speech_recognition as sr
-import eel
-from backend.config import (
-    TTS_VOICE_ID,
-    TTS_RATE,
-    TTS_ENGINE,
-    SPEECH_LANGUAGE,
-    SPEECH_TIMEOUT,
-    SPEECH_PHRASE_TIMEOUT,
-    SPEECH_PAUSE_THRESHOLD,
-)
+
+from backend.config import (SPEECH_LANGUAGE, SPEECH_PAUSE_THRESHOLD,
+                            SPEECH_PHRASE_TIMEOUT, SPEECH_TIMEOUT, TTS_ENGINE,
+                            TTS_RATE, TTS_VOICE_ID)
 
 
 def speak(text):

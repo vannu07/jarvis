@@ -1,7 +1,8 @@
+import os
+
 import cv2
 import numpy as np
 from PIL import Image  # pillow package
-import os
 
 path = "backend\\auth\\samples"  # Path for samples already taken
 
