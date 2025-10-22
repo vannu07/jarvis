@@ -85,7 +85,7 @@ def handle_user_text(user_text):
 def openCommand(query):
     query = query.replace(ASSISTANT_NAME, "")
     query = query.replace("open", "")
-    query.lower()
+    query = query.lower()
 
     app_name = query.strip()
     if not app_name:
