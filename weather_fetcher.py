@@ -183,7 +183,7 @@ class WeatherFetcher:
 
 if __name__ == "__main__":
     """
-    Standalone usage example for testing.
+    Interactive CLI demo.
     """
     import sys
     
