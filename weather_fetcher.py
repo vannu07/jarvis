@@ -43,7 +43,7 @@ class WeatherFetcher:
                 "feels_like": round(data["main"]["feels_like"]),
                 "humidity": data["main"]["humidity"],
                 "condition": data["weather"][0]["description"],
-                "wind_speed": round(data["wind"]["speed"] * 3.6, 1),  # Convert m/s to km/h
+                "wind_speed": round(data["wind"]["speed"] * 3.6),  # Convert m/s to km/h and round to whole number
                 "pressure": data["main"]["pressure"]
             }
         except requests.exceptions.HTTPError as e:
