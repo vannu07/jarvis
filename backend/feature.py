@@ -314,7 +314,7 @@ def get_weather_forecast(city_name, days=5):
         first_day = forecast_data[0]
         last_day = forecast_data[-1]
         summary = (
-            f"Today: {first_day['temp_min']} to {first_day['temp_max']} degrees, {first_day['condition']}. "
+            f"On the first day of the forecast: {first_day['temp_min']} to {first_day['temp_max']} degrees, {first_day['condition']}. "
             f"Later in the forecast: {last_day['temp_min']} to {last_day['temp_max']} degrees, {last_day['condition']}."
         )
         speak(summary)
