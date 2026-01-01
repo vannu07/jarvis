@@ -88,6 +88,14 @@ def create_env_file():
 
     env_content.extend([f"WHATSAPP_DEFAULT_COUNTRY_CODE={country_code}", ""])
 
+    # Weather Settings
+    print("\n🌤️  WEATHER API SETTINGS")
+    print("-" * 30)
+    print("Get your free API key from: https://openweathermap.org/api")
+    openweathermap_key = input("OpenWeatherMap API Key (optional): ").strip()
+
+    env_content.extend([f"OPENWEATHERMAP_API_KEY={openweathermap_key}", ""])
+
     # Web Server Settings
     print("\n🌐 WEB SERVER SETTINGS")
     print("-" * 30)
