@@ -289,6 +289,11 @@ class Config:
     def user_email(self) -> str:
         return self.get("USER_EMAIL", "varnitkumar@example.com")
 
+    # Weather Settings
+    @property
+    def openweathermap_api_key(self) -> str:
+        return self.get("OPENWEATHERMAP_API_KEY", "")
+
     # Feature Flags
     @property
     def face_recognition_enabled(self) -> bool:

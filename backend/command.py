@@ -85,6 +85,25 @@ def takeAllCommands(message=None):
                 from backend.feature import PlayYoutube
 
                 PlayYoutube(query)
+            elif "weather" in query or "forecast" in query:
+                from backend.feature import get_weather, get_weather_forecast
+
+                # Extract city name from query
+                city = query.replace("weather", "").replace("forecast", "").replace("in", "").replace("for", "").strip()
+                
+                if not city:
+                    speak("Which city would you like to know the weather for?")
+                    city_query = takecommand()
+                    if city_query:
+                        city = city_query.strip()
+                
+                if city:
+                    if "forecast" in query:
+                        get_weather_forecast(city)
+                    else:
+                        get_weather(city)
+                else:
+                    speak("Please specify a city name.")
             else:
                 from backend.feature import chatBot
 

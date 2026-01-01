@@ -59,6 +59,7 @@ Jarvis is an intelligent voice assistant that combines speech recognition, natur
 - System Control (apps, windows, shortcuts)
 - Contact Management with voice lookup
 - Web Browsing through voice
+- Weather Forecasts via OpenWeatherMap API
 
 </td>
 </tr>
@@ -211,6 +212,7 @@ Create a `.env` file:
 HUGGINGFACE_TOKEN=your_token_here
 PORCUPINE_ACCESS_KEY=your_key_here
 NEWSAPI_KEY=your_newsapi_key
+OPENWEATHERMAP_API_KEY=your_openweathermap_api_key
 
 # Voice Settings
 TTS_RATE=150
@@ -281,6 +283,29 @@ Jarvis, open WhatsApp
 
 </td>
 </tr>
+<tr>
+<td width="33%">
+
+#### Weather & Information
+```
+Jarvis, weather in London
+Jarvis, forecast for Tokyo
+Jarvis, weather in New York
+Jarvis, forecast Paris
+```
+
+</td>
+<td width="66%" colspan="2">
+
+#### AI Assistant
+```
+Jarvis, what is the capital of France?
+Jarvis, tell me a joke
+Jarvis, help me with Python
+```
+
+</td>
+</tr>
 </table>
 
 ### Keyboard Shortcuts
@@ -299,6 +324,66 @@ Jarvis, open WhatsApp
 ### Wake Words
 
 Say **"Jarvis"** or **"Alexa"** followed by your command
+
+---
+
+## Weather Feature
+
+Jarvis integrates with OpenWeatherMap API to provide real-time weather updates and forecasts.
+
+### Setup OpenWeatherMap API
+
+1. Sign up for a free API key at [OpenWeatherMap](https://openweathermap.org/api)
+2. Add your API key to the `.env` file:
+   ```env
+   OPENWEATHERMAP_API_KEY=your_api_key_here
+   ```
+
+### Weather Commands
+
+**Current Weather:**
+```bash
+Jarvis, weather in London
+Jarvis, what's the weather in Tokyo
+Jarvis, weather for New York
+```
+
+**Weather Forecast (3-5 days):**
+```bash
+Jarvis, forecast for Paris
+Jarvis, forecast in Mumbai
+Jarvis, weather forecast for Berlin
+```
+
+### Features
+
+- ✅ Current temperature, feels-like temperature, and conditions
+- ✅ Humidity, wind speed, and atmospheric pressure
+- ✅ 3-5 day weather forecast with daily min/max temperatures
+- ✅ Graceful handling of invalid city names
+- ✅ Clean console output with detailed information
+- ✅ Voice responses for hands-free operation
+
+### Standalone Usage
+
+You can also use the weather module independently:
+
+```bash
+python weather_fetcher.py
+```
+
+Then use commands like:
+- `weather London` - Get current weather
+- `forecast Tokyo` - Get 5-day forecast
+- `exit` - Quit the application
+
+### Testing
+
+Run the weather module tests:
+
+```bash
+python -m testing.weather_test
+```
 
 ---
 
@@ -329,7 +414,12 @@ jarvis/
 │   └── controller.js           # Event handlers
 ├── main.py                     # Entry point
 ├── run.py                      # Launcher
+├── weather_fetcher.py          # Weather module
+├── news_fetcher.py             # News module
 ├── requirements.txt            # Dependencies
+├── testing/
+│   ├── weather_test.py         # Weather tests
+│   └── text_test.py            # Command parser tests
 └── jarvis.db                  # SQLite DB
 ```
 
