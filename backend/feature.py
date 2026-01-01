@@ -26,11 +26,12 @@ from hugchat import hugchat
 from backend.command import speak, takecommand
 from backend.config import (ASSISTANT_NAME, AUDIO_START_SOUND_PATH,
                             DATABASE_PATH, HUGCHAT_COOKIE_PATH,
-                            PORCUPINE_ACCESS_KEY, PORCUPINE_KEYWORDS,
-                            PORCUPINE_SENSITIVITY, WHATSAPP_COUNTRY_CODE,
-                            WHATSAPP_MESSAGE_DELAY)
+                            OPENWEATHERMAP_API_KEY, PORCUPINE_ACCESS_KEY,
+                            PORCUPINE_KEYWORDS, PORCUPINE_SENSITIVITY,
+                            WHATSAPP_COUNTRY_CODE, WHATSAPP_MESSAGE_DELAY)
 from backend.helper import extract_yt_term, remove_words
 from backend.nlp.command_parser import parse_command
+from weather_fetcher import WeatherFetcher
 
 # -----------------------------
 # Database & audio setup
@@ -38,6 +39,22 @@ from backend.nlp.command_parser import parse_command
 conn = sqlite3.connect(DATABASE_PATH)
 cursor = conn.cursor()
 pygame.mixer.init()
+
+# -----------------------------
+# Weather fetcher setup
+# -----------------------------
+_weather_fetcher = None
+
+def get_weather_fetcher():
+    """Get or create a WeatherFetcher instance."""
+    global _weather_fetcher
+    if _weather_fetcher is None and OPENWEATHERMAP_API_KEY:
+        try:
+            _weather_fetcher = WeatherFetcher(OPENWEATHERMAP_API_KEY)
+        except ValueError as e:
+            print(f"Failed to initialize weather fetcher: {e}")
+            return None
+    return _weather_fetcher
 
 
 # -----------------------------
@@ -257,3 +274,67 @@ def chatBot(query):
     print(response)
     speak(response)
     return response
+
+
+# -----------------------------
+# Weather functions
+# -----------------------------
+def get_weather(city_name):
+    """
+    Fetch and display current weather for a city.
+    
+    Args:
+        city_name (str): Name of the city
+    """
+    fetcher = get_weather_fetcher()
+    if not fetcher:
+        speak("Weather API key is not configured. Please set OPENWEATHERMAP_API_KEY in your environment.")
+        return
+    
+    weather_data, error = fetcher.fetch_current_weather(city_name)
+    
+    if error:
+        speak(f"Sorry, I encountered an error: {error}")
+        print(f"Weather error: {error}")
+    elif weather_data:
+        response = (
+            f"Weather in {weather_data['city']}, {weather_data['country']}. "
+            f"Temperature is {weather_data['temperature']} degrees Celsius, "
+            f"feels like {weather_data['feels_like']} degrees. "
+            f"Condition: {weather_data['condition']}. "
+            f"Humidity is {weather_data['humidity']} percent."
+        )
+        speak(response)
+        print(fetcher.format_current_weather(weather_data))
+
+
+def get_weather_forecast(city_name, days=5):
+    """
+    Fetch and display weather forecast for a city.
+    
+    Args:
+        city_name (str): Name of the city
+        days (int): Number of days (3-5)
+    """
+    fetcher = get_weather_fetcher()
+    if not fetcher:
+        speak("Weather API key is not configured. Please set OPENWEATHERMAP_API_KEY in your environment.")
+        return
+    
+    forecast_data, error = fetcher.fetch_forecast(city_name, days)
+    
+    if error:
+        speak(f"Sorry, I encountered an error: {error}")
+        print(f"Forecast error: {error}")
+    elif forecast_data:
+        speak(f"Here is the {days} day forecast for {city_name}")
+        print(fetcher.format_forecast(forecast_data))
+        
+        # Provide a brief summary via speech
+        first_day = forecast_data[0]
+        last_day = forecast_data[-1]
+        summary = (
+            f"On the first day of the forecast: {first_day['temp_min']} to {first_day['temp_max']} degrees, {first_day['condition']}. "
+            f"Later in the forecast: {last_day['temp_min']} to {last_day['temp_max']} degrees, {last_day['condition']}."
+        )
+        speak(summary)

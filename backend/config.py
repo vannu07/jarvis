@@ -64,6 +64,9 @@ WEB_SERVER_BLOCK = config.web_server_block
 USER_NAME = config.user_name
 USER_EMAIL = config.user_email
 
+# Weather Settings
+OPENWEATHERMAP_API_KEY = config.openweathermap_api_key
+
 # Feature Flags
 FACE_RECOGNITION_ENABLED = config.face_recognition_enabled
 HOTWORD_DETECTION_ENABLED = config.hotword_detection_enabled

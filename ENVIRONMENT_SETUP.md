@@ -41,6 +41,7 @@ This will guide you through configuring all necessary settings.
 - **GOOGLE_SPEECH_API_KEY**: For improved speech recognition
 - **PORCUPINE_ACCESS_KEY**: For hotword detection
 - **HUGCHAT_COOKIE_PATH**: For AI chatbot functionality
+- **OPENWEATHERMAP_API_KEY**: For weather forecast features
 
 ## 📋 Configuration Categories
 
@@ -88,6 +89,12 @@ HUGCHAT_MODEL_NAME=huggingface/CodeLlama-7b-Instruct-hf
 WHATSAPP_DEFAULT_COUNTRY_CODE=+91
 WHATSAPP_MESSAGE_DELAY=5
 ```
+
+### 🌤️ Weather API
+```env
+OPENWEATHERMAP_API_KEY=your_openweathermap_key_here
+```
+Get your free API key at: https://openweathermap.org/api
 
 ### 🌐 Web Server
 ```env
@@ -192,6 +199,7 @@ VERBOSE_LOGGING=true
 | `USER_EMAIL` | string | varnitkumar@example.com | Your email |
 | `GOOGLE_SPEECH_API_KEY` | string | "" | Google Speech API key |
 | `PORCUPINE_ACCESS_KEY` | string | "" | Porcupine hotword detection key |
+| `OPENWEATHERMAP_API_KEY` | string | "" | OpenWeatherMap API key |
 | `FACE_RECOGNITION_NAMES` | list | Unknown,Unknown,Varnit Kumar | Recognized face names |
 | `WHATSAPP_COUNTRY_CODE` | string | +91 | Default country code |
 | `WEB_SERVER_PORT` | int | 8000 | Web server port |
@@ -229,6 +237,9 @@ PORCUPINE_KEYWORDS=jarvis,alexa
 
 # WhatsApp
 WHATSAPP_DEFAULT_COUNTRY_CODE=+91
+
+# Weather API
+OPENWEATHERMAP_API_KEY=your_openweathermap_key_here
 
 # Web Server
 WEB_SERVER_HOST=localhost
