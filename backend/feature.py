@@ -40,6 +40,22 @@ conn = sqlite3.connect(DATABASE_PATH)
 cursor = conn.cursor()
 pygame.mixer.init()
 
+# -----------------------------
+# Weather fetcher setup
+# -----------------------------
+_weather_fetcher = None
+
+def get_weather_fetcher():
+    """Get or create a WeatherFetcher instance."""
+    global _weather_fetcher
+    if _weather_fetcher is None and OPENWEATHERMAP_API_KEY:
+        try:
+            _weather_fetcher = WeatherFetcher(OPENWEATHERMAP_API_KEY)
+        except ValueError as e:
+            print(f"Failed to initialize weather fetcher: {e}")
+            return None
+    return _weather_fetcher
+
 
 # -----------------------------
 # Play assistant start sound
@@ -270,14 +286,17 @@ def get_weather(city_name):
     Args:
         city_name (str): Name of the city
     """
-    if not OPENWEATHERMAP_API_KEY:
+    fetcher = get_weather_fetcher()
+    if not fetcher:
         speak("Weather API key is not configured. Please set OPENWEATHERMAP_API_KEY in your environment.")
         return
     
-    fetcher = WeatherFetcher(OPENWEATHERMAP_API_KEY)
-    weather_data = fetcher.fetch_current_weather(city_name)
+    weather_data, error = fetcher.fetch_current_weather(city_name)
     
-    if weather_data:
+    if error:
+        speak(f"Sorry, I encountered an error: {error}")
+        print(f"Weather error: {error}")
+    elif weather_data:
         response = (
             f"Weather in {weather_data['city']}, {weather_data['country']}. "
             f"Temperature is {weather_data['temperature']} degrees Celsius, "
@@ -287,8 +306,6 @@ def get_weather(city_name):
         )
         speak(response)
         print(fetcher.format_current_weather(weather_data))
-    else:
-        speak(f"Sorry, I could not find weather information for {city_name}. Please check the city name and try again.")
 
 
 def get_weather_forecast(city_name, days=5):
@@ -299,14 +316,17 @@ def get_weather_forecast(city_name, days=5):
         city_name (str): Name of the city
         days (int): Number of days (3-5)
     """
-    if not OPENWEATHERMAP_API_KEY:
+    fetcher = get_weather_fetcher()
+    if not fetcher:
         speak("Weather API key is not configured. Please set OPENWEATHERMAP_API_KEY in your environment.")
         return
     
-    fetcher = WeatherFetcher(OPENWEATHERMAP_API_KEY)
-    forecast_data = fetcher.fetch_forecast(city_name, days)
+    forecast_data, error = fetcher.fetch_forecast(city_name, days)
     
-    if forecast_data:
+    if error:
+        speak(f"Sorry, I encountered an error: {error}")
+        print(f"Forecast error: {error}")
+    elif forecast_data:
         speak(f"Here is the {days} day forecast for {city_name}")
         print(fetcher.format_forecast(forecast_data))
         
@@ -318,5 +338,3 @@ def get_weather_forecast(city_name, days=5):
             f"Later in the forecast: {last_day['temp_min']} to {last_day['temp_max']} degrees, {last_day['condition']}."
         )
         speak(summary)
-    else:
-        speak(f"Sorry, I could not find forecast information for {city_name}. Please check the city name and try again.")

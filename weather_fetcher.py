@@ -11,7 +11,9 @@ class WeatherFetcher:
     """
 
     def __init__(self, api_key):
-        self.api_key = api_key
+        if not api_key or not api_key.strip():
+            raise ValueError("OpenWeatherMap API key is required and cannot be empty")
+        self.api_key = api_key.strip()
         self.base_url = "https://api.openweathermap.org/data/2.5"
 
     def fetch_current_weather(self, city):
@@ -22,7 +24,7 @@ class WeatherFetcher:
             city (str): City name
 
         Returns:
-            dict: Weather data or None if error
+            tuple: (weather_data dict, error_message str) - One will be None
         """
         endpoint = f"{self.base_url}/weather"
         params = {
@@ -36,7 +38,7 @@ class WeatherFetcher:
             response.raise_for_status()
             data = response.json()
 
-            return {
+            weather_data = {
                 "city": data["name"],
                 "country": data["sys"]["country"],
                 "temperature": round(data["main"]["temp"]),
@@ -46,18 +48,16 @@ class WeatherFetcher:
                 "wind_speed": round(data["wind"]["speed"] * 3.6),  # Convert m/s to km/h and round to whole number
                 "pressure": data["main"]["pressure"]
             }
+            return weather_data, None
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 404:
-                print(f"City '{city}' not found.")
+                return None, f"City '{city}' not found."
             else:
-                print(f"HTTP error: {e}")
-            return None
+                return None, f"HTTP error: {e}"
         except requests.exceptions.RequestException as e:
-            print(f"Network error: {e}")
-            return None
+            return None, f"Network error: {e}"
         except KeyError as e:
-            print(f"Unexpected API response format: {e}")
-            return None
+            return None, f"Unexpected API response format: {e}"
 
     def fetch_forecast(self, city, days=5):
         """
@@ -68,7 +68,7 @@ class WeatherFetcher:
             days (int): Number of days (3-5)
 
         Returns:
-            list: List of forecast data or None if error
+            tuple: (forecast_list list, error_message str) - One will be None
         """
         # Limit days to 5 (API provides 5-day forecast)
         days = min(max(days, 3), 5)
@@ -119,20 +119,17 @@ class WeatherFetcher:
                 forecast["temp_max"] = round(forecast["temp_max"])
                 forecast_list.append(forecast)
 
-            return forecast_list
+            return forecast_list, None
 
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 404:
-                print(f"City '{city}' not found.")
+                return None, f"City '{city}' not found."
             else:
-                print(f"HTTP error: {e}")
-            return None
+                return None, f"HTTP error: {e}"
         except requests.exceptions.RequestException as e:
-            print(f"Network error: {e}")
-            return None
+            return None, f"Network error: {e}"
         except KeyError as e:
-            print(f"Unexpected API response format: {e}")
-            return None
+            return None, f"Unexpected API response format: {e}"
 
     def format_current_weather(self, weather_data):
         """
@@ -208,16 +205,22 @@ if __name__ == "__main__":
         elif command.lower().startswith("weather "):
             city = command[len("weather "):].strip()
             if city:
-                weather = fetcher.fetch_current_weather(city)
-                print(fetcher.format_current_weather(weather))
+                weather, error = fetcher.fetch_current_weather(city)
+                if error:
+                    print(f"Error: {error}")
+                else:
+                    print(fetcher.format_current_weather(weather))
             else:
                 print("Please specify a city name.")
 
         elif command.lower().startswith("forecast "):
             city = command[len("forecast "):].strip()
             if city:
-                forecast = fetcher.fetch_forecast(city, days=5)
-                print(fetcher.format_forecast(forecast))
+                forecast, error = fetcher.fetch_forecast(city, days=5)
+                if error:
+                    print(f"Error: {error}")
+                else:
+                    print(fetcher.format_forecast(forecast))
             else:
                 print("Please specify a city name.")
 

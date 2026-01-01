@@ -87,9 +87,22 @@ def takeAllCommands(message=None):
                 PlayYoutube(query)
             elif "weather" in query or "forecast" in query:
                 from backend.feature import get_weather, get_weather_forecast
+                import re
 
-                # Extract city name from query
-                city = query.replace("weather", "").replace("forecast", "").replace("in", "").replace("for", "").strip()
+                # Extract city name using more robust parsing
+                # First, look for "in" or "for" followed by city name
+                match = re.search(r'\b(?:in|for)\s+(.+)', query, re.IGNORECASE)
+                if match:
+                    city = match.group(1).strip()
+                    # Remove trailing command words if any
+                    for word in ["weather", "forecast", "please"]:
+                        city = re.sub(r'\b' + word + r'\b\s*$', '', city, flags=re.IGNORECASE).strip()
+                else:
+                    # Fallback: remove common command words
+                    city = query
+                    for word in ["weather", "forecast", "what's", "what is", "the", "show", "me", "get"]:
+                        city = re.sub(r'\b' + word + r'\b', '', city, flags=re.IGNORECASE)
+                    city = city.strip()
                 
                 if not city:
                     speak("Which city would you like to know the weather for?")
