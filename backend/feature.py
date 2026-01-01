@@ -31,6 +31,7 @@ from backend.config import (ASSISTANT_NAME, AUDIO_START_SOUND_PATH,
                             WHATSAPP_COUNTRY_CODE, WHATSAPP_MESSAGE_DELAY)
 from backend.helper import extract_yt_term, remove_words
 from backend.nlp.command_parser import parse_command
+from weather_fetcher import WeatherFetcher
 
 # -----------------------------
 # Database & audio setup
@@ -269,8 +270,6 @@ def get_weather(city_name):
     Args:
         city_name (str): Name of the city
     """
-    from weather_fetcher import WeatherFetcher
-    
     if not OPENWEATHERMAP_API_KEY:
         speak("Weather API key is not configured. Please set OPENWEATHERMAP_API_KEY in your environment.")
         return
@@ -300,8 +299,6 @@ def get_weather_forecast(city_name, days=5):
         city_name (str): Name of the city
         days (int): Number of days (3-5)
     """
-    from weather_fetcher import WeatherFetcher
-    
     if not OPENWEATHERMAP_API_KEY:
         speak("Weather API key is not configured. Please set OPENWEATHERMAP_API_KEY in your environment.")
         return

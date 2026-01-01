@@ -185,11 +185,13 @@ if __name__ == "__main__":
     """
     Standalone usage example for testing.
     """
+    import sys
+    
     api_key = os.getenv("OPENWEATHERMAP_API_KEY")
     if not api_key:
         print("Error: OPENWEATHERMAP_API_KEY environment variable not set.")
         print("Please set it in your .env file or environment.")
-        exit(1)
+        sys.exit(1)
 
     fetcher = WeatherFetcher(api_key)
 
@@ -204,7 +206,7 @@ if __name__ == "__main__":
             break
 
         elif command.lower().startswith("weather "):
-            city = command[8:].strip()
+            city = command[len("weather "):].strip()
             if city:
                 weather = fetcher.fetch_current_weather(city)
                 print(fetcher.format_current_weather(weather))
@@ -212,7 +214,7 @@ if __name__ == "__main__":
                 print("Please specify a city name.")
 
         elif command.lower().startswith("forecast "):
-            city = command[9:].strip()
+            city = command[len("forecast "):].strip()
             if city:
                 forecast = fetcher.fetch_forecast(city, days=5)
                 print(fetcher.format_forecast(forecast))
