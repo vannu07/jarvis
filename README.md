@@ -415,7 +415,6 @@ jarvis/
 ├── main.py                     # Entry point
 ├── run.py                      # Launcher
 ├── weather_fetcher.py          # Weather module
-├── news_fetcher.py             # News module
 ├── requirements.txt            # Dependencies
 ├── testing/
 │   ├── weather_test.py         # Weather tests
