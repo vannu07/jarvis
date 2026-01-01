@@ -169,8 +169,22 @@ Thank you for contributing to Jarvis during Hacktoberfest! Your contributions he
 
 ## 📝 Code Standards
 
+## Code Formatting
+
+This project uses the [Black](https://github.com/psf/black) code formatter to ensure a consistent code style. All pull requests will be checked for formatting by a GitHub Action.
+
+### Running Black Locally
+
+Before submitting a pull request, please format your code using Black. You can do this by running the following command in your terminal:
+
+```bash
+pip install black
+black .
+```
+
 ### Python Code
 - Follow PEP 8 style guidelines
+- **All Python code is automatically formatted using Black. Pull requests will be checked, and a commit will be added to automatically fix any formatting issues.**
 - Use meaningful variable and function names
 - Add docstrings for functions and classes
 - Keep functions focused and small

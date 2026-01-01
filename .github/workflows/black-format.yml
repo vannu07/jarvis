@@ -1,0 +1,40 @@
+name: Black Code Formatter
+
+on:
+  pull_request:
+    paths:
+      - "**.py"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check formatting with Black
+        uses: psf/black@stable
+
+  format:
+    # This job only runs if the 'lint' job fails
+    if: failure()
+    needs: lint
+    runs-on: ubuntu-latest
+    permissions:
+      # This permission is required to allow the action to commit to the PR branch
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Check out the specific branch from the pull request
+          ref: ${{ github.head_ref }}
+
+      - name: Auto-format with Black
+        uses: psf/black@stable
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "style: auto-format python code using black"
+          branch: ${{ github.head_ref }}
+          commit_options: '--no-verify'

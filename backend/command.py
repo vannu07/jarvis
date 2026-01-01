@@ -146,7 +146,6 @@ def _handle_comm(query: str) -> None:
         return
     chatBot(query)
 
-
 @eel.expose
 def takeAllCommands(message: Optional[str] = None) -> None:
     """Entry point for both text and voice; maintains original behavior."""
