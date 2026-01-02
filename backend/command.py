@@ -154,7 +154,6 @@ def takeAllCommands(message: Optional[str] = None) -> None:
         query = takecommand()
         if not query:
             speak("No command was given.")
-            eel.ShowHood()
             return
         eel.senderText(query)
     else:
