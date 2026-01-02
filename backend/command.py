@@ -112,8 +112,9 @@ def takecommand() -> Optional[str]:
         query = r.recognize_google(audio, language=SPEECH_LANGUAGE)
         eel.DisplayMessage(query)
         print(f"User said: {query}\n")
-        speak(query)  
-        return query.strip().lower()
+        speak(query)
+        normalized = query.strip().lower()
+        return normalized or None
     except Exception as e:
         print(f"Recognition error: {e}")
         return None
