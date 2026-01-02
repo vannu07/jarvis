@@ -40,6 +40,8 @@ command_map = {
         "show me youtube",
         "open yt",
         "launch yt",
+        "please open youtube",
+        "open youtube for me",
     ],
     "open_whatsapp": [
         "open whatsapp",
@@ -85,6 +87,8 @@ command_map = {
         "can you search",
         "look for",
         "find information about",
+        "search on google",
+        "could you search",
     ],
     "play_music": [
         "play music",
@@ -167,8 +171,8 @@ def parse_command(user_input):
         user_input, all_phrases.keys(), scorer=fuzz.token_sort_ratio
     )
 
-    # Lower threshold to 65 for better fuzzy matching of misspellings
-    if score >= 65:
+    # Lower threshold to 60 for better fuzzy matching of misspellings and variations
+    if score >= 60:
         return all_phrases[best_match]
 
     return None
