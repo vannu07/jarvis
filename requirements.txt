@@ -30,3 +30,7 @@ httpx==0.25.2
 # Utilities
 pillow==10.0.1
 python-dotenv==1.0.0
+
+# Natural Language Processing
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.21.1  # For faster fuzzy matching
