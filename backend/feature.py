@@ -115,7 +115,13 @@ def handle_user_text(user_text):
 
     # Search
     elif intent == "search_google":
-        search_term = user_text.replace("search for", "").replace("google", "").strip()
+        # Remove common search command words to extract the actual search term
+        search_words = ["search", "google", "for", "look", "up", "find", "on", "can", "you", "could", "about", "information"]
+        search_term = user_text.lower()
+        for word in search_words:
+            search_term = search_term.replace(word, "")
+        search_term = search_term.strip()
+        
         if search_term:
             speak(f"Searching Google for {search_term}")
             webbrowser.open(f"https://www.google.com/search?q={search_term}")
@@ -125,21 +131,40 @@ def handle_user_text(user_text):
     # Screenshot
     elif intent == "take_screenshot":
         try:
+            from datetime import datetime
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"screenshot_{timestamp}.png"
             screenshot = pyautogui.screenshot()
-            screenshot.save("screenshot.png")
-            speak("Screenshot taken successfully")
+            screenshot.save(filename)
+            speak(f"Screenshot saved as {filename}")
         except Exception as e:
             speak("Could not take screenshot")
             print(f"Screenshot error: {e}")
 
     # System commands
     elif intent == "shutdown":
-        speak("Shutting down the system")
-        os.system("shutdown /s /t 1")
+        speak("Are you sure you want to shutdown? This action cannot be undone.")
+        # Note: Actual shutdown requires user confirmation in production
+        # Uncomment the following for actual shutdown:
+        # confirmation = takecommand()
+        # if confirmation and "yes" in confirmation.lower():
+        #     speak("Shutting down the system")
+        #     if os.name == 'nt':  # Windows
+        #         os.system("shutdown /s /t 1")
+        #     else:  # Unix/Linux/Mac
+        #         os.system("shutdown -h now")
 
     elif intent == "restart":
-        speak("Restarting the system")
-        os.system("shutdown /r /t 1")
+        speak("Are you sure you want to restart? This action cannot be undone.")
+        # Note: Actual restart requires user confirmation in production
+        # Uncomment the following for actual restart:
+        # confirmation = takecommand()
+        # if confirmation and "yes" in confirmation.lower():
+        #     speak("Restarting the system")
+        #     if os.name == 'nt':  # Windows
+        #         os.system("shutdown /r /t 1")
+        #     else:  # Unix/Linux/Mac
+        #         os.system("shutdown -r now")
 
     else:
         speak("Intent recognized but no action defined.")
