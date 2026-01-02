@@ -78,17 +78,93 @@ def handle_user_text(user_text):
         speak("Sorry, I did not understand that.")
         return
 
+    # Time and Date queries
     if intent == "get_time":
         from datetime import datetime
 
         now = datetime.now().strftime("%H:%M")
         speak(f"The current time is {now}")
 
+    elif intent == "get_date":
+        from datetime import datetime
+
+        today = datetime.now().strftime("%B %d, %Y")
+        speak(f"Today's date is {today}")
+
+    # Opening applications
     elif intent == "open_youtube":
         PlayYoutube(user_text)
 
-    elif intent in ["open_whatsapp", "open_calculator"]:
+    elif intent in ["open_whatsapp", "open_calculator", "open_browser"]:
         openCommand(user_text)
+
+    # Weather
+    elif intent == "get_weather":
+        speak("Please tell me the city name")
+        # Note: Weather fetching requires city name, which should be handled separately
+
+    # Music
+    elif intent == "play_music":
+        speak("Playing music")
+        # Note: Can be extended to integrate with music services
+
+    # News
+    elif intent == "get_news":
+        speak("Fetching latest news")
+        # Note: Can be integrated with news_fetcher module
+
+    # Search
+    elif intent == "search_google":
+        # Remove common search command words to extract the actual search term
+        search_words = ["search", "google", "for", "look", "up", "find", "on", "can", "you", "could", "about", "information"]
+        search_term = user_text.lower()
+        for word in search_words:
+            search_term = search_term.replace(word, "")
+        search_term = search_term.strip()
+        
+        if search_term:
+            speak(f"Searching Google for {search_term}")
+            webbrowser.open(f"https://www.google.com/search?q={search_term}")
+        else:
+            speak("What would you like me to search for?")
+
+    # Screenshot
+    elif intent == "take_screenshot":
+        try:
+            from datetime import datetime
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"screenshot_{timestamp}.png"
+            screenshot = pyautogui.screenshot()
+            screenshot.save(filename)
+            speak(f"Screenshot saved as {filename}")
+        except Exception as e:
+            speak("Could not take screenshot")
+            print(f"Screenshot error: {e}")
+
+    # System commands
+    elif intent == "shutdown":
+        speak("Are you sure you want to shutdown? This action cannot be undone.")
+        # Note: Actual shutdown requires user confirmation in production
+        # Uncomment the following for actual shutdown:
+        # confirmation = takecommand()
+        # if confirmation and "yes" in confirmation.lower():
+        #     speak("Shutting down the system")
+        #     if os.name == 'nt':  # Windows
+        #         os.system("shutdown /s /t 1")
+        #     else:  # Unix/Linux/Mac
+        #         os.system("shutdown -h now")
+
+    elif intent == "restart":
+        speak("Are you sure you want to restart? This action cannot be undone.")
+        # Note: Actual restart requires user confirmation in production
+        # Uncomment the following for actual restart:
+        # confirmation = takecommand()
+        # if confirmation and "yes" in confirmation.lower():
+        #     speak("Restarting the system")
+        #     if os.name == 'nt':  # Windows
+        #         os.system("shutdown /r /t 1")
+        #     else:  # Unix/Linux/Mac
+        #         os.system("shutdown -r now")
 
     else:
         speak("Intent recognized but no action defined.")
