@@ -29,31 +29,28 @@ _OPEN_KEY = "open"
 
 def _get_engine() -> pyttsx3.Engine:
     global _engine
-    if _engine is None:
-        with _engine_lock:
-            if _engine is None: 
-                eng = pyttsx3.init(TTS_ENGINE)
-                voices = eng.getProperty("voices")
-                if 0 <= TTS_VOICE_ID < len(voices):
-                    eng.setProperty("voice", voices[TTS_VOICE_ID].id)
-                eng.setProperty("rate", TTS_RATE)
-                eng.setProperty("volume", TTS_VOLUME)
-                _engine = eng
-    return _engine
+    with _engine_lock:
+        if _engine is None:
+            eng = pyttsx3.init(TTS_ENGINE)
+            voices = eng.getProperty("voices")
+            if 0 <= TTS_VOICE_ID < len(voices):
+                eng.setProperty("voice", voices[TTS_VOICE_ID].id)
+            eng.setProperty("rate", TTS_RATE)
+            eng.setProperty("volume", TTS_VOLUME)
+            _engine = eng
+        return _engine
+
 
 
 def _get_recognizer() -> sr.Recognizer:
     global _recognizer
-    if _recognizer is None:
-        with _rec_lock:
-            if _recognizer is None:
-                r = sr.Recognizer()
-                r.pause_threshold = SPEECH_PAUSE_THRESHOLD
-                r.dynamic_energy_threshold = False
-                _recognizer = r
-    return _recognizer
-
-
+    with _rec_lock:
+        if _recognizer is None:
+            r = sr.Recognizer()
+            r.pause_threshold = SPEECH_PAUSE_THRESHOLD
+            r.dynamic_energy_threshold = False
+            _recognizer = r
+        return _recognizer
 def _get_microphone() -> sr.Microphone:
     global _microphone
     if _microphone is None:
