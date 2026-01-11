@@ -5,9 +5,33 @@ Provides colored console output and status indicators for better user experience
 
 import time
 from colorama import Fore, Style, init
+import re
 
 # Initialize colorama for cross-platform colored output
 init(autoreset=True)
+
+
+def sanitize_log_message(message):
+    """
+    Best-effort sanitization of log messages to avoid printing sensitive data
+    such as phone numbers in clear text.
+
+    This masks long digit sequences (optionally starting with '+') that look
+    like phone numbers, keeping only the last 2 digits visible.
+    """
+    text = str(message)
+
+    # Mask phone-like patterns: optional '+' followed by 8 or more digits.
+    def _mask_phone(match):
+        value = match.group(0)
+        # Keep last 2 characters, replace the rest with '*'
+        if len(value) <= 2:
+            return "*" * len(value)
+        return "*" * (len(value) - 2) + value[-2:]
+
+    phone_pattern = re.compile(r"\+?\d{8,}")
+    text = phone_pattern.sub(_mask_phone, text)
+    return text
 
 
 class StatusIndicator:
@@ -29,7 +53,8 @@ class StatusIndicator:
     @staticmethod
     def processing(message="Processing..."):
         """Display processing status"""
-        print(f"{StatusIndicator.PROCESSING_COLOR}⚙️  {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{StatusIndicator.PROCESSING_COLOR}⚙️  {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def done(message="Done.", duration=None):
