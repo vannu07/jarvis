@@ -40,7 +40,7 @@ def command_handler(stop_event):
 
             # ----------------- COMMANDS -----------------
             if "remind me" in command:
-                with Timer("Setting reminder"):
+                with Timer(f"Setting reminder: {command}"):
                     set_reminder(command)
 
             elif "goodbye" in command or "exit" in command:

@@ -33,8 +33,7 @@ def takecommand():
         r.pause_threshold = SPEECH_PAUSE_THRESHOLD
         r.adjust_for_ambient_noise(source)
         
-        with Timer() as timer:
-            audio = r.listen(source, SPEECH_TIMEOUT, SPEECH_PHRASE_TIMEOUT)
+        audio = r.listen(source, SPEECH_TIMEOUT, SPEECH_PHRASE_TIMEOUT)
 
     try:
         StatusIndicator.processing("Recognizing...")

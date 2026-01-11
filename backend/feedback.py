@@ -48,7 +48,8 @@ class StatusIndicator:
     @staticmethod
     def listening(message="Listening..."):
         """Display listening status"""
-        print(f"{StatusIndicator.LISTENING_COLOR}🎤 {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{StatusIndicator.LISTENING_COLOR}🎤 {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def processing(message="Processing..."):
@@ -61,37 +62,44 @@ class StatusIndicator:
         """Display completion status with optional duration"""
         if duration is not None:
             message = f"{message} (Completed in {duration:.2f}s)"
-        print(f"{StatusIndicator.SUCCESS_COLOR}✓ {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{StatusIndicator.SUCCESS_COLOR}✓ {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def success(message):
         """Display success message"""
-        print(f"{StatusIndicator.SUCCESS_COLOR}✓ {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{StatusIndicator.SUCCESS_COLOR}✓ {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def error(message):
         """Display error message"""
-        print(f"{StatusIndicator.ERROR_COLOR}✗ {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{StatusIndicator.ERROR_COLOR}✗ {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def info(message):
         """Display informational message"""
-        print(f"{StatusIndicator.INFO_COLOR}ℹ {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{StatusIndicator.INFO_COLOR}ℹ {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def warning(message):
         """Display warning message"""
-        print(f"{StatusIndicator.WARNING_COLOR}⚠ {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{StatusIndicator.WARNING_COLOR}⚠ {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def command(message):
         """Display received command"""
-        print(f"{Fore.WHITE}» {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{Fore.WHITE}» {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def response(message):
         """Display assistant response"""
-        print(f"{Fore.LIGHTGREEN_EX}« {message}{Style.RESET_ALL}")
+        safe_message = sanitize_log_message(message)
+        print(f"{Fore.LIGHTGREEN_EX}« {safe_message}{Style.RESET_ALL}")
 
 
 class Timer:
