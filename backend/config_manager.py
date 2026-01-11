@@ -279,6 +279,14 @@ class Config:
     @property
     def web_server_block(self) -> bool:
         return self.get_bool("WEB_SERVER_BLOCK", True)
+    
+    @property
+    def frontend_path(self) -> str:
+        return self.get("FRONTEND_PATH", "frontend")
+    
+    @property
+    def frontend_index_file(self) -> str:
+        return self.get("FRONTEND_INDEX_FILE", "index.html")
 
     # User Settings
     @property
