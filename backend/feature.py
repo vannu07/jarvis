@@ -297,7 +297,7 @@ def findContact(query):
 
     try:
         query = query.strip().lower()
-        StatusIndicator.processing(f"Searching for contact: {query}")
+        StatusIndicator.processing("Searching for contact")
         cursor.execute(
             "SELECT Phone FROM contacts WHERE LOWER(name) LIKE ? OR LOWER(name) LIKE ?",
             ("%" + query + "%", query + "%"),
@@ -334,7 +334,7 @@ def whatsApp(Phone, message, flag, name):
         message = ""
         jarvis_message = "Starting video call."
 
-    StatusIndicator.processing(f"Initiating WhatsApp action for {name}")
+    StatusIndicator.processing("Initiating WhatsApp action")
     
     with Timer(f"WhatsApp {flag}"):
         encoded_message = quote(message)
