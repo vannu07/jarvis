@@ -312,7 +312,7 @@ def findContact(query):
         if not mobile_number.startswith(WHATSAPP_COUNTRY_CODE):
             mobile_number = WHATSAPP_COUNTRY_CODE + mobile_number
 
-        StatusIndicator.success("Contact found.")
+        StatusIndicator.success(f"Contact found: {query}")
         return mobile_number, query
     except Exception as e:
         StatusIndicator.error(f"Error in findContact: {e}")
@@ -324,15 +324,15 @@ def findContact(query):
 def whatsApp(Phone, message, flag, name):
     if flag == "message":
         target_tab = 12
-        jarvis_message = "Message sent successfully."
+        jarvis_message = "Message sent successfully to " + name
     elif flag == "call":
         target_tab = 7
         message = ""
-        jarvis_message = "Calling contact."
+        jarvis_message = "Calling " + name
     else:
         target_tab = 6
         message = ""
-        jarvis_message = "Starting video call."
+        jarvis_message = "Starting video call with " + name
 
     StatusIndicator.processing("Initiating WhatsApp action")
     
