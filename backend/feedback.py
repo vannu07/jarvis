@@ -54,7 +54,7 @@ class StatusIndicator:
     def processing(message="Processing..."):
         """Display processing status"""
         safe_message = sanitize_log_message(message)
-        print(f"{StatusIndicator.PROCESSING_COLOR}⚙️  {safe_message}{Style.RESET_ALL}")
+        print(f"{StatusIndicator.PROCESSING_COLOR}⚙️ {safe_message}{Style.RESET_ALL}")
     
     @staticmethod
     def done(message="Done.", duration=None):
