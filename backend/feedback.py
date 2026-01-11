@@ -21,15 +21,27 @@ def sanitize_log_message(message):
     """
     text = str(message)
 
-    # Mask phone-like patterns: optional '+' followed by 8 or more digits.
+    # Mask phone-like patterns: optional '+' followed by 8 or more digits,
+    # allowing simple separators like spaces or dashes that may appear in
+    # country-code formats (e.g. '+12 34567890', '+12-34567890').
     def _mask_phone(match):
         value = match.group(0)
-        # Keep last 2 characters, replace the rest with '*'
-        if len(value) <= 2:
+        # Remove common separators before masking so that the masking length
+        # reflects the actual digits, then reinsert separators as '*'.
+        digits_only = re.sub(r"[^\d+]", "", value)
+        if len(digits_only) <= 2:
             return "*" * len(value)
-        return "*" * (len(value) - 2) + value[-2:]
+        # Keep last 2 digits visible, replace other visible characters with '*'
+        num_mask_chars = len(digits_only) - 2
+        masked_core = "*" * num_mask_chars + digits_only[-2:]
+        # Expand masked_core back to the original length with '*'
+        # to avoid leaking formatting details.
+        if len(masked_core) < len(value):
+            masked_core = masked_core.rjust(len(value), "*")
+        return masked_core
 
-    phone_pattern = re.compile(r"\+?\d{8,}")
+    # Match '+' followed by at least 8 digits, possibly separated by spaces or dashes.
+    phone_pattern = re.compile(r"\+?\d(?:[\d\s-]{7,})")
     text = phone_pattern.sub(_mask_phone, text)
     return text
 
