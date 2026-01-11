@@ -30,6 +30,7 @@ httpx==0.25.2
 # Utilities
 pillow==10.0.1
 python-dotenv==1.0.0
+colorama==0.4.6
 
 # Natural Language Processing
 fuzzywuzzy==0.18.0

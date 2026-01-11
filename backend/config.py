@@ -60,6 +60,10 @@ WEB_SERVER_PORT = config.web_server_port
 WEB_SERVER_MODE = config.web_server_mode
 WEB_SERVER_BLOCK = config.web_server_block
 
+# Frontend Settings
+FRONTEND_PATH = config.frontend_path
+FRONTEND_INDEX_FILE = config.frontend_index_file
+
 # User Settings
 USER_NAME = config.user_name
 USER_EMAIL = config.user_email
